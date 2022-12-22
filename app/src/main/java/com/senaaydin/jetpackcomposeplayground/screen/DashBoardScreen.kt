@@ -1,30 +1,36 @@
 package com.senaaydin.jetpackcomposeplayground.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.senaaydin.jetpackcomposeplayground.R
 import com.senaaydin.jetpackcomposeplayground.components.buttons.CustomElevatedButton
+import com.senaaydin.jetpackcomposeplayground.components.textfields.CustomTextField
 import com.senaaydin.jetpackcomposeplayground.layout.CustomScaffold
 import com.senaaydin.jetpackcomposeplayground.layout.CustomTopBar
 
 @Composable
 fun DashBoardScreen(
     navigateToButtons: () -> Unit,
-    navigateToLoadings: () -> Unit,
-    navigateToOtpScreen: () -> Unit,
     navigateToExpandableCardScreen: () -> Unit,
-    navigateToBasicCardScreen: () -> Unit,
-    navigateToProgressDialogScreen: () -> Unit,
+    navigateToCardScreen: () -> Unit,
     navigateToSearchBarScreen: () -> Unit,
-    navigateToHalfCircleProgress: () -> Unit,
+    navigateToPinCodeScreen: () -> Unit,
+    navigateToFlipCard: () -> Unit,
+    navigateToTextFields: () -> Unit,
+    navigateToDropDown: () -> Unit,
 ) {
     val scaffoldState = rememberScaffoldState()
 
@@ -42,26 +48,26 @@ fun DashBoardScreen(
                 navigateToButtons = {
                     navigateToButtons.invoke()
                 },
-                navigateToOtpScreen = {
-                    navigateToOtpScreen.invoke()
-                },
-                navigateToLoadings = {
-                    navigateToLoadings.invoke()
-                },
                 navigateToExpandableCardScreen = {
                     navigateToExpandableCardScreen.invoke()
                 },
-                navigateToBasicCardScreen = {
-                    navigateToBasicCardScreen.invoke()
-                },
-                navigateToProgressDialogScreen = {
-                    navigateToProgressDialogScreen.invoke()
+                navigateToCardScreen = {
+                    navigateToCardScreen.invoke()
                 },
                 navigateToSearchBarScreen = {
                     navigateToSearchBarScreen.invoke()
                 },
-                navigateToHalfCircleProgress = {
-                    navigateToHalfCircleProgress.invoke()
+                navigateToPinCodeScreen = {
+                    navigateToPinCodeScreen.invoke()
+                },
+                navigateToFlipCard = {
+                    navigateToFlipCard.invoke()
+                },
+                navigateToTextFields = {
+                    navigateToTextFields.invoke()
+                },
+                navigateToDropDown = {
+                    navigateToDropDown.invoke()
                 }
             )
         },
@@ -69,70 +75,107 @@ fun DashBoardScreen(
     )
 }
 
+
+
 @Composable
 private fun Content(
     navigateToButtons: () -> Unit,
-    navigateToOtpScreen: () -> Unit,
-    navigateToLoadings: () -> Unit,
     navigateToExpandableCardScreen: () -> Unit,
-    navigateToBasicCardScreen: () -> Unit,
-    navigateToProgressDialogScreen: () -> Unit,
+    navigateToCardScreen: () -> Unit,
     navigateToSearchBarScreen: () -> Unit,
-    navigateToHalfCircleProgress: () -> Unit,
+    navigateToPinCodeScreen: () -> Unit,
+    navigateToFlipCard: () -> Unit,
+    navigateToTextFields: () -> Unit,
+    navigateToDropDown: () -> Unit
 ) {
+    val listState = rememberLazyListState()
+    LazyColumn(state = listState, modifier = Modifier.fillMaxSize() ) {
+
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ) {
-        CustomElevatedButton(onClick = navigateToButtons, text = "Buttons", textColor = Color.White)
+        CustomElevatedButton(
+            onClick = navigateToButtons,
+            text = "Buttons",
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
+        )
+        Text(
+            stringResource(id = R.string.otp),
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier
+                .clickable(onClick = navigateToPinCodeScreen)
+                .fillMaxWidth()
+                .padding(10.dp)
+        )
         CustomElevatedButton(
             modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToOtpScreen,
+            onClick = navigateToPinCodeScreen,
             text = "Otp",
-            textColor = Color.White
-        )
-        CustomElevatedButton(
-            modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToLoadings,
-            text = "Loadings",
-            textColor = Color.White
-        )
-        CustomElevatedButton(
-            modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToExpandableCardScreen,
-            text = "Expandable Card",
-            textColor = Color.White
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
         )
 
         CustomElevatedButton(
             modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToBasicCardScreen,
+            onClick = navigateToCardScreen,
             text = "Basic Cards",
-            textColor = Color.White
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
         )
 
         CustomElevatedButton(
             modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToProgressDialogScreen,
-            text = "Progress Dialog",
-            textColor = Color.White
+            onClick = navigateToFlipCard,
+            text = "Flip Card",
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
         )
 
         CustomElevatedButton(
             modifier = Modifier.padding(top = 10.dp),
             onClick = navigateToSearchBarScreen,
             text = "SearchBar",
-            textColor = Color.White
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
         )
 
         CustomElevatedButton(
             modifier = Modifier.padding(top = 10.dp),
-            onClick = navigateToHalfCircleProgress,
-            text = "Half Circle Progress",
-            textColor = Color.White
+            onClick = navigateToPinCodeScreen,
+            text = "Pin Code",
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
+        )
+
+        CustomElevatedButton(
+            modifier = Modifier.padding(top = 10.dp),
+            onClick = navigateToDropDown,
+            text = "Drop Down",
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
+        )
+
+        CustomElevatedButton(
+            modifier = Modifier.padding(top = 10.dp),
+            onClick = navigateToTextFields,
+            text = "Text Fields",
+            elevation = ButtonDefaults.elevation(2.dp),
+            textColor = Color.White,
+            colors = ButtonDefaults.buttonColors(Color.DarkGray)
         )
     }
 }

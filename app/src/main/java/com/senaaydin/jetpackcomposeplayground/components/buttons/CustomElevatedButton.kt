@@ -19,7 +19,7 @@ fun CustomElevatedButton(
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.elevation(5.dp),
     colors: ButtonColors = ButtonDefaults.buttonColors(),
-    shape: RoundedCornerShape = RoundedCornerShape(50),
+    shape: RoundedCornerShape = RoundedCornerShape(30),
     leadingIcon: ImageVector? = null,
     iconTintColor: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
 ) {

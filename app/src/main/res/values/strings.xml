@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jetpack Compose Playground</string>
+    <string name="otp">Otp screen</string>
 </resources>

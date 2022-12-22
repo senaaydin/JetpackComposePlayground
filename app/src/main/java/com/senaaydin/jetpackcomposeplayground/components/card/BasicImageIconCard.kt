@@ -26,7 +26,7 @@ import com.senaaydin.jetpackcomposeplayground.components.image.CustomNetworkImag
 
 @ExperimentalMaterialApi
 @Composable
-fun CustomBasicImageIconCard(
+fun BasicImageIconCard(
     modifier: Modifier = Modifier,
     onClickFavorite: () -> Unit,
     onClickBookmark: () -> Unit,

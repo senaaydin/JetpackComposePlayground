@@ -65,12 +65,6 @@ private fun Content() {
             textColor = Color(0xff648A4F),
         )
 
-//        GradientButton(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 8.dp, vertical = 8.dp)
-//        ) {}
-
         OutlinedButton(
             modifier = Modifier
                 .fillMaxWidth()

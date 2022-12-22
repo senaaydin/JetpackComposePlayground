@@ -5,15 +5,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.senaaydin.jetpackcomposeplayground.components.`package`.DropDownScreen
+import com.senaaydin.jetpackcomposeplayground.components.card.FlipCardScreen
+import com.senaaydin.jetpackcomposeplayground.components.pincodeview.PinCodeScreen
+import com.senaaydin.jetpackcomposeplayground.components.textfields.SearchBar
 import com.senaaydin.jetpackcomposeplayground.layout.CustomScaffold
-import com.senaaydin.jetpackcomposeplayground.screen.ButtonsScreen
-import com.senaaydin.jetpackcomposeplayground.screen.DashBoardScreen
+import com.senaaydin.jetpackcomposeplayground.screen.*
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalComposeUiApi::class
+)
 @Composable
 fun NavGraph(startDestination: String = NavScreen.DashBoard.route) {
     val navController = rememberAnimatedNavController()
@@ -30,21 +38,22 @@ fun NavGraph(startDestination: String = NavScreen.DashBoard.route) {
             composable(NavScreen.DashBoard.route) {
                 DashBoardScreen(navigateToButtons = {
                     navController.navigate(NavScreen.Buttons.route)
-                }, navigateToOtpScreen = {
-                    navController.navigate(NavScreen.Otp.route)
-                }, navigateToLoadings = {
-                    navController.navigate(NavScreen.Loading.route)
-                }, navigateToExpandableCardScreen = {
-                    navController.navigate(NavScreen.ExpandableCard.route)
-                }, navigateToBasicCardScreen = {
-                    navController.navigate(NavScreen.BasicCards.route)
-                }, navigateToProgressDialogScreen = {
-                    navController.navigate(NavScreen.ProgressDialog.route)
+                }, navigateToCardScreen = {
+                    navController.navigate(NavScreen.Cards.route)
                 }, navigateToSearchBarScreen = {
                     navController.navigate(NavScreen.SearchBar.route)
-                }, navigateToHalfCircleProgress = {
-                    navController.navigate(NavScreen.HalfCircleProgressBar.route)
-                })
+                },  navigateToPinCodeScreen = {
+                    navController.navigate(NavScreen.PinCodeScreen.route)
+                }, navigateToDropDown = {
+                    navController.navigate(NavScreen.DropDown.route)
+                }, navigateToFlipCard = {
+                        navController.navigate(NavScreen.FlipCard.route)
+                    }, navigateToTextFields = {
+                        navController.navigate(NavScreen.TextFields.route)
+                }, navigateToExpandableCardScreen = {
+                        navController.navigate(NavScreen.ExpandableCard.route)
+                    },
+                )
             }
 
             composable(NavScreen.Buttons.route) {
@@ -52,45 +61,29 @@ fun NavGraph(startDestination: String = NavScreen.DashBoard.route) {
                     navController.popBackStack()
                 })
             }
-//            composable(NavScreen.Loading.route) {
-//                LoadingScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//            composable(NavScreen.Otp.route) {
-//                OtpScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//            composable(NavScreen.ExpandableCard.route) {
-//                ExpandableCardScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//
-//            composable(NavScreen.BasicCards.route) {
-//                BasicCardsScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//
-//            composable(NavScreen.ProgressDialog.route) {
-//                ProgressDialogScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//
-//            composable(NavScreen.SearchBar.route) {
-//                SearchScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
-//
-//            composable(NavScreen.HalfCircleProgressBar.route) {
-//                HalfCirclePercentGraphScreen(navigateToBack = {
-//                    navController.popBackStack()
-//                })
-//            }
+            composable(NavScreen.PinCodeScreen.route) {
+                PinCodeScreen(navigateToBack = {
+                    navController.popBackStack()
+                })
+            }
+            composable(NavScreen.DropDown.route) {
+                DropDownScreen()
+            }
+            composable(NavScreen.FlipCard.route) {
+                FlipCardScreen()
+            }
+            composable(NavScreen.TextFields.route) {
+                TextFieldScreen()
+            }
+            composable(NavScreen.Cards.route) {
+                CardsScreen()
+            }
+            composable(NavScreen.SearchBar.route) {
+                SearchScreen (navigateToBack = {
+                        navController.popBackStack()
+                    }
+                )
+            }
         }
     }
 }
